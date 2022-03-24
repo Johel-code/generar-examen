@@ -9,4 +9,9 @@ class Faculty extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function careers()
+    {
+        return $this->hasMany(Career::class);
+    }
 }
