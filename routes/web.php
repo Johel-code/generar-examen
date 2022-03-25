@@ -14,7 +14,7 @@ use App\Http\Livewire\Faculties;
 |
 */
 
-Route::view('/', 'index')->name('home');
+Route::view('/', 'welcome');
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/faculties', Faculties::class);
     Route::get('/dashboard', function () {

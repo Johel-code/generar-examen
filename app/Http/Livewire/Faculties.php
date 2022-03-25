@@ -29,7 +29,6 @@ class Faculties extends Component
 
     public function cerrarModal()
     {
-        dd($this);
         $this->modal = false;
     }
 
@@ -39,7 +38,7 @@ class Faculties extends Component
     }
 
     public function editar($id)
-    {
+    {    
         $faculty = Faculty::findOrFail($id);
         $this->id_faculty = $id;
         $this->name = $faculty->name;
