@@ -35,6 +35,7 @@ class Faculties extends Component
     public function limpiarCampos()
     {
         $this->name = '';
+        $this->id_faculty = null;
     }
 
     public function editar($id)
