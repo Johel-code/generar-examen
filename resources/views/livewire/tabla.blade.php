@@ -36,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($faculties as $faculty)
+                    @foreach ($facultie as $faculty)
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
@@ -59,7 +59,9 @@
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <p class="text-gray-900 whitespace-no-wrap">
-                                {{$faculty->created_at}}
+                                
+                                {{ date('d-m-Y', strtotime($faculty->created_at)) }}
+
                             </p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">  
@@ -87,6 +89,8 @@
                     @endforeach
                 </tbody>
             </table>
+            
+            {{ $facultys->links() }}
             <div
                 class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
                 <span class="text-xs xs:text-sm text-gray-900">

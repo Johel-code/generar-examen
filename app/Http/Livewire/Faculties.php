@@ -4,16 +4,25 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Faculty;
+use Livewire\WithPagination;
 
 class Faculties extends Component
 {
-    public $faculties, $id_faculty, $name;
+    use WithPagination;
+    public $id_faculty, $name;
+    public $term;
+    protected $queryString = ['term'];
     public $modal = false;
 
     public function render()
     {
-        $this->faculties = Faculty::latest()->take(5)->get();
-        return view('livewire.faculties');
+        //$faculties = Faculty::paginate(3);
+        //return view('livewire.faculties');
+        return view('livewire.faculties', [
+            'faculties' => Faculty::when($this->term, function($query, $term){
+                return $query->where('name', 'LIKE', "%$term%");
+            })->latest()->paginate(5)
+        ]);
     }
 
     public function crear()

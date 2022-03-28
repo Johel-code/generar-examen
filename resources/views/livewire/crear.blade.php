@@ -49,7 +49,7 @@
         <div class="modal-content py-4 text-left px-6">
             <!--Title-->
             <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold text-gray-500">Add Caretaker</p>
+                <p class="text-2xl font-bold text-gray-500">Facultad</p>
             </div>
             <!--Body-->
             <div class="my-5 mr-5 ml-5 flex justify-center">
