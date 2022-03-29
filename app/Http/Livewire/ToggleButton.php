@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Faculty;
 use Livewire\Component;
-use Illuminate\Database\Eloquent\Model;
 
 class ToggleButton extends Component
 {
-    public Model $model;
+    public Faculty $faculty;
     public string $field;
     public bool $isActive;
 
     public function mount()
     {
-        $this->isActive = (bool) $this->model->getAttribute($this->field);
+        $this->isActive = $this->faculty->getAttribute('active');
     }
 
     public function render()
@@ -23,6 +23,6 @@ class ToggleButton extends Component
 
     public function updating($field, $value)
     {
-        $this->model->setAttribute($this->field, $value)->save();
+        $this->faculty->setAttribute($this->field, $value)->save();
     }
 }
