@@ -175,12 +175,9 @@
                   {{-- <span class="hidden md:block">PRAUS</span> --}}
                 </div>
                 <div class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
-                  <div class="rounded flex items-center w-full max-w-xl mr-4 p-2">
-                    {{-- <button class="outline-none focus:outline-none">
-                      <svg class="w-5 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </button>
-                    <input type="search" name="" id="" placeholder="Search" class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" /> --}}
-                  </div>
+                  <div class="rounded flex items-center w-full max-w-xl mr-4 shadow-sm"></div>
+                  {{-- @livewire('search.search-faculty') --}}
+                  
                   <ul class="flex items-center">
                     {{-- <li>
                       <button
@@ -315,8 +312,8 @@
             
               <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
                 <div class="mt-4 mx-4">
-                  <main class="py-2">
-                    <div class="px-4">
+                  <main class="w-full overflow-hidden rounded-lg shadow-xs">
+                    <div class="w-full overflow-x-auto">
                       @yield('content')
                     </div>
                   </main>
@@ -654,7 +651,7 @@
                 <!-- ./Task Summaries -->
             
                 <!-- Client Table -->
-                {{-- <div class="mt-4 mx-4">
+                <div class="mt-4 mx-4">
                   <div class="w-full overflow-hidden rounded-lg shadow-xs">
                     <div class="w-full overflow-x-auto">
                       <table class="w-full">
@@ -812,7 +809,7 @@
                       </span>
                     </div>
                   </div>
-                </div> --}}
+                </div>
                 <!-- ./Client Table -->
             
                 <!-- Contact Form -->

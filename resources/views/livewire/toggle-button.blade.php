@@ -5,8 +5,8 @@
         .switch {
         position: relative;
         display: inline-block;
-        width: 60px;
-        height: 34px;
+        width: 50px;
+        height: 24px;
         }
     
     
@@ -32,8 +32,8 @@
         .slider:before {
         position: absolute;
         content: "";
-        height: 26px;
-        width: 26px;
+        height: 16px;
+        width: 16px;
         left: 4px;
         bottom: 4px;
         background-color: white;
@@ -42,11 +42,11 @@
         }
     
         input:checked + .slider {
-        background-color: #2196F3;
+        background-color: #f37521;
         }
     
         input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
+        box-shadow: 0 0 1px #f37521;
         }
     
         input:checked + .slider:before {

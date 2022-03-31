@@ -11,16 +11,21 @@ class Faculties extends Component
     use WithPagination;
     public $id_faculty, $name;
     public $term;
-    protected $queryString = ['term'];
     public $modal = false;
 
     public function render()
     {
         //$faculties = Faculty::paginate(3);
         //return view('livewire.faculties');
-        return view('livewire.faculties', [
+        /* return view('livewire.faculties', [
             'faculties' => Faculty::when($this->term, function($query, $term){
                 return $query->where('name', 'LIKE', "%$term%");
+            })->latest()->paginate(3)
+        ]); */
+
+        return view('livewire.faculties', [
+            'faculties' => Faculty::when($this->term, function($query, $term){
+                return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
             })->latest()->paginate(5)
         ]);
     }
