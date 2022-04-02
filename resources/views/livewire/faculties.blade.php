@@ -1,6 +1,6 @@
-<div class="bg-transparent w-full">
+<div class="bg-transparent w-full pt-10">
 	<div class=" flex items-center justify-between">
-		<div class="space-x-8">
+		<div class="">
 			<button 
 				wire:click="crear()" 
 				class="bg-orange-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer hover:bg-orange-700 transition duration-300">
