@@ -63,8 +63,8 @@
         }
     </style>
     <label class="switch">
-        <input wire:model="isActive" class="form-check-input" type="checkbox" id="{{$field.$faculty->id}}">
-        <span for="{{ $field.$faculty->id }}" class="slider round"></span>
+        <input wire:model="isActive" class="form-check-input" type="checkbox" id="{{$field.$career->id}}">
+        <span for="{{ $field.$career->id }}" class="slider round"></span>
     </label>
 </div>
 
