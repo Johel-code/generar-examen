@@ -47,7 +47,7 @@
         <div class="modal-content py-4 text-left px-6">
             <!--Title-->
             <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold text-gray-500">Facultad</p>
+                <p class="text-2xl font-bold text-gray-500">Carrera</p>
             </div>
             <!--Body-->
             <div class="my-4 mr-5 ml-5 flex justify-center">
@@ -59,18 +59,35 @@
                         <div class="">
                             <input type="text" id="name" wire:model="name" autocomplete="off" name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. Economía">
                         </div>
-                        {{-- <div class="">
+                        <div class="">
                             <label for="phone" class="text-md text-gray-600">Phone Number</label>
                         </div>
                         <div class="">
-                            <input type="text" id="phone" autocomplete="off" name="phone" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. 0729400426">
+                            <select class="form-select appearance-none
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding bg-no-repeat
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                            <option selected>Desplega este menú</option>
+                            <option value="1">Agua</option>
+                        </select>
                         </div>
                         <div class="">
                             <label for="id_number" class="text-md text-gray-600">ID Number</label>
                         </div>
                         <div class="">
                             <input type="number" id="id_number" autocomplete="off" name="id_number" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Caretaker's ID number">
-                        </div> --}}
+                        </div>
                     </div>
                     <!--Footer-->
 

@@ -7,7 +7,7 @@
 				Create
 			</button>
 			@if($modal)
-				@include('livewire.crear')
+				@include('livewire.crear-career')
 			@endif
 		</div>
 		<div class="bg-white rounded flex items-center w-full max-w-md shadow-sm border border-gray-200">
