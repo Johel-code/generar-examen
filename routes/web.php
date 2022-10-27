@@ -18,6 +18,7 @@ Route::view('/', 'welcome')->name('home');
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::view('/faculties', 'index');  
     Route::view('/careers', 'index-career');
+    Route::view('/subjects', 'index-subject');
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
