@@ -53,17 +53,10 @@
             <div class="my-4 mr-5 ml-5 flex justify-center">
                 <form>
                     <div class="">
-                        <div class="">
-                            <label for="name" class="text-md text-gray-600">Name</label>
-                        </div>
-                        <div class="">
-                            <input type="text" id="name" wire:model="name" autocomplete="off" name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. Ing. Financiera">
-                        </div>
-                        <div class="">
-                            <label for="phone" class="text-md text-gray-600">Facultad</label>
-                        </div>
-                        <div class="">
-                            <select wire:model="faculty" class="form-select appearance-none
+                          <label for="name" class="text-md text-gray-600">Name</label>
+                          <input type="text" id="name" wire:model="name" autocomplete="off" name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. Ing. Financiera">
+                          <label for="phone" class="text-md text-gray-600">Facultad</label>   
+                          <select wire:model="faculty" class="form-select appearance-none
                             block
                             w-full
                             px-3
@@ -78,22 +71,15 @@
                             ease-in-out
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                            <option selected>Desplega este menú</option>
+                            <option value="" disabled selected>Desplega este menú</option>
                             @foreach($faculties as $faculty)
                             <option value="{{$faculty->id}}">{{$faculty->name}}</option>
                             @endforeach
                         </select>
-                        </div>
-                        <div class="">
-                            <label for="id_number" class="text-md text-gray-600">ID Number</label>
-                        </div>
-                        <div class="">
-                            <input type="number" id="id_number" autocomplete="off" name="id_number" class="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Caretaker's ID number">
-                        </div>
                     </div>
                     <!--Footer-->
 
-                    <div class="flex justify-between pt-2">
+                    <div class="flex justify-between pt-6">
                         <button
                             wire:click="cerrarModal()" 
                             class="px-4 bg-gray-200 p-3 rounded text-black hover:bg-gray-300 font-semibold">

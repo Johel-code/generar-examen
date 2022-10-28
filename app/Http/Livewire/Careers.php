@@ -46,6 +46,7 @@ class Careers extends Component
     public function limpiarCampos()
     {
         $this->name = '';
+        $this->faculty = null;
         $this->id_career = null;
     }
 
@@ -54,6 +55,7 @@ class Careers extends Component
         $career = Career::findOrFail($id);
         $this->id_career = $id;
         $this->name = $career->name;
+        $this->faculty = $career->faculty_id;
         $this->abrirModal();
     }
 
