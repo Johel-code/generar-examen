@@ -57,13 +57,13 @@
                             <label for="name" class="text-md text-gray-600">Name</label>
                         </div>
                         <div class="">
-                            <input type="text" id="name" wire:model="name" autocomplete="off" name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. Economía">
+                            <input type="text" id="name" wire:model="name" autocomplete="off" name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. Ing. Financiera">
                         </div>
                         <div class="">
-                            <label for="phone" class="text-md text-gray-600">Phone Number</label>
+                            <label for="phone" class="text-md text-gray-600">Facultad</label>
                         </div>
                         <div class="">
-                            <select class="form-select appearance-none
+                            <select wire:model="faculty" class="form-select appearance-none
                             block
                             w-full
                             px-3
@@ -79,7 +79,9 @@
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                             <option selected>Desplega este menú</option>
-                            <option value="1">Agua</option>
+                            @foreach($faculties as $faculty)
+                            <option value="{{$faculty->id}}">{{$faculty->name}}</option>
+                            @endforeach
                         </select>
                         </div>
                         <div class="">

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Career;
+use App\Models\Faculty;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,13 +14,16 @@ class Careers extends Component
     public $term;
     public $modal = false;
 
+    public $faculty = null;
+
     public function render()
     {
         //return view('livewire.careers');
         return view('livewire.careers', [
             'careers' => Career::when($this->term, function($query, $term){
                 return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
-            })->latest()->paginate(5)
+            })->latest()->paginate(5),
+            'faculties' => Faculty::all()
         ]);
     }
 
@@ -63,7 +67,8 @@ class Careers extends Component
     {
         Career::updateOrCreate(['id'=>$this->id_career],
             [
-                'name' => $this->name
+                'name' => $this->name,
+                'faculty_id' => $this->faculty
             ]);
             
         session()->flash('message',

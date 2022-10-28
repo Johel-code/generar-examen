@@ -11,6 +11,6 @@ class CrearCareer extends Component
 
     public function render()
     {
-        return view('livewire.crear-career');
+      return view('livewire.crear-career');
     }
 }
