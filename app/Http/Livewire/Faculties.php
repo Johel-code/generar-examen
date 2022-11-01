@@ -13,6 +13,15 @@ class Faculties extends Component
     public $term;
     public $modal = false;
 
+    protected $rules = [
+        'name' => 'required|max:20',
+    ];
+
+    protected $messages = [
+        'name.required' => 'El campo nombre es requerido',
+        'name.max' => 'El nombre no debe tener mas de 20 caracteres',
+    ];
+
     public function render()
     {
         //$faculties = Faculty::paginate(3);
@@ -39,6 +48,7 @@ class Faculties extends Component
     public function abrirModal()
     {
         $this->modal = true;
+        $this->resetValidation();
     }
 
     public function cerrarModal()
@@ -68,6 +78,7 @@ class Faculties extends Component
 
     public function guardar()
     {
+        $this->validate();
         Faculty::updateOrCreate(['id'=>$this->id_faculty],
             [
                 'name' => $this->name
