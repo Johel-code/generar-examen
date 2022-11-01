@@ -10,6 +10,9 @@
 				@include('livewire.crear-career')
 			@endif
 		</div>
+        {{-- <div> --}}
+        {{--     @livewire('create-career') --}}
+        {{-- </div> --}}
 		<div class="bg-white rounded flex items-center w-full max-w-md shadow-sm border border-gray-200">
 			<button class="outline-none focus:outline-none">
 			<svg class="w-8 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round" 

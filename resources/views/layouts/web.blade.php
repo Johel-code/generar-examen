@@ -8,6 +8,8 @@
         <title>Gestor de Examenes</title>
         <link rel="stylesheet" href="{{ asset('css/app.css')}}">
         @livewireStyles
+        
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
     <body>
@@ -912,6 +914,18 @@
             </div>
         </div> 
         @livewireScripts
+
+        <script>
+            livewire.on('alert', function(message){
+                Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: message,
+                showConfirmButton: false,
+                timer: 1500
+                })
+            })
+        </script>
     </body>
     <!-- component -->   
 

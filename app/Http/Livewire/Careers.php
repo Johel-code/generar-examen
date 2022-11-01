@@ -16,6 +16,19 @@ class Careers extends Component
 
     public $faculty = null;
 
+    // protected $listeners = ['render'];
+
+    protected $rules = [
+        'name' => 'required|max:20',
+        'faculty' => 'required'
+    ];
+
+    protected $messages = [
+        'name.required' => 'El campo nombre es requerido',
+        'name.max' => 'El nombre no debe tener mas de 20 caracteres',
+        'faculty.required' => 'Debe seleccionar una facultad'
+    ];
+
     public function render()
     {
         //return view('livewire.careers');
@@ -36,6 +49,7 @@ class Careers extends Component
     public function abrirModal()
     {
         $this->modal = true;
+        $this->resetValidation();
     }
 
     public function cerrarModal()
@@ -45,10 +59,10 @@ class Careers extends Component
 
     public function limpiarCampos()
     {
-        $this->name = '';
-        $this->faculty = null;
-        $this->id_career = null;
-    }
+            $this->name = '';
+            $this->faculty = null;
+            $this->id_career = null;
+        }
 
     public function editar($id)
     {    
@@ -67,6 +81,7 @@ class Careers extends Component
 
     public function guardar()
     {
+        $this->validate();
         Career::updateOrCreate(['id'=>$this->id_career],
             [
                 'name' => $this->name,
