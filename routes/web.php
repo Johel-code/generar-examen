@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Faculties;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(PageController::class)->group(function () {
+  
+  Route::get('/',       'home')->name('home');
+  Route::get('blog',    'blog')->name('blog');
+  Route::get('blog/{post:slug}', 'post')->name('post');
+
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::view('/', 'welcome')->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->group(function (){
+    Route::view('/faculties', 'index');  
+    Route::view('/careers', 'index-career');
+    Route::view('/subjects', 'index-subject');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

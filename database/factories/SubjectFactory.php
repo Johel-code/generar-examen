@@ -17,7 +17,8 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word,
+            'career_id' => rand(1, 10)
         ];
     }
 }
