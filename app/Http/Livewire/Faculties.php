@@ -9,9 +9,22 @@ use Livewire\WithPagination;
 class Faculties extends Component
 {
     use WithPagination;
+
+    public $columns = [
+        'name' => 'NAME',
+        'careers_count' => 'CAREERS', 
+        'updated_at' => 'UPDATED_AT',
+        'active' => 'ACTIVE'
+    ];
+    
     public $id_faculty, $name;
+    public $faculty;
     public $term;
     public $modal = false;
+    public $confirm_delete = false;
+
+    public $sortColumn = "updated_at";
+    public $sortDirection = "desc";
 
     protected $rules = [
         'name' => 'required|max:20',
@@ -32,11 +45,34 @@ class Faculties extends Component
             })->latest()->paginate(3)
         ]); */
 
-        return view('livewire.faculties', [
-            'faculties' => Faculty::when($this->term, function($query, $term){
-                return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
-            })->latest()->paginate(5)
-        ]);
+        $faculties = Faculty::withCount('careers')
+            ->orderBy($this->sortColumn, $this->sortDirection);
+
+        // return view('livewire.faculties', [
+        //     'faculties' => Faculty::when($this->term, function($query, $term){
+        //         return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
+        //     })->latest()->paginate(5)
+        // ]);
+
+        if($this->term) {
+            $faculties->when($this->term, function($query, $term){
+                 return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
+            });
+        }
+        $faculties = $faculties->paginate(5);
+
+        return view('livewire.faculties', ['faculties' => $faculties]);
+    }
+
+    public function sort($column)
+    {
+        $this->sortColumn = $column;
+        $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+    }
+
+    public function cerrarBuscador()
+    {
+        $this->term = "";
     }
 
     public function crear()
@@ -70,10 +106,17 @@ class Faculties extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function confirmDelete($id)
     {
-        Faculty::find($id)->delete();
+        $this->faculty = $id;  
+        $this->confirm_delete = true; 
+    }
+
+    public function deleteFaculty()
+    {
+        Faculty::find($this->faculty)->delete();
         session()->flash('message', 'Registro eliminado correctamente');
+        $this->confirm_delete = false; 
     }
 
     public function guardar()
