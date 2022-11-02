@@ -10,12 +10,21 @@ use Livewire\WithPagination;
 class Careers extends Component
 {
     use WithPagination;
+
+    public $columns = [
+        'name' => 'NAME',
+        'subjects_count' => 'SUBJECTS', 
+        'updated_at' => 'UPDATED_AT',
+        'active' => 'ACTIVE'
+    ];
     public $id_career, $name;
     public $term;
     public $modal = false;
 
     public $faculty = null;
 
+    public $sortColumn = "updated_at";
+    public $sortDirection = "desc";
     // protected $listeners = ['render'];
 
     protected $rules = [
@@ -31,13 +40,33 @@ class Careers extends Component
 
     public function render()
     {
-        //return view('livewire.careers');
+        $careers = Career::withCount('subjects')
+            ->orderBy($this->sortColumn, $this->sortDirection);
+
+        // return view('livewire.careers', [
+        //     'careers' => Career::when($this->term, function($query, $term){
+        //         return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
+        //     })->latest()->paginate(5),
+        //     'faculties' => Faculty::all()
+        // ]);
+
+        if($this->term){
+            $careers->when($this->term, function($query, $term){
+                return $query->whereRaw('LOWER(name) LIKE ? ', ['%'.trim(strtolower($term)).'%']);
+            });
+        }
+        $careers = $careers->paginate(5);
+
         return view('livewire.careers', [
-            'careers' => Career::when($this->term, function($query, $term){
-                return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
-            })->latest()->paginate(5),
+            'careers' => $careers,
             'faculties' => Faculty::all()
         ]);
+    }
+
+    public function sort($column)
+    {
+        $this->sortColumn = $column;
+        $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
     }
 
     public function crear()
