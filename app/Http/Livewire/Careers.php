@@ -43,13 +43,6 @@ class Careers extends Component
         $careers = Career::withCount('subjects')
             ->orderBy($this->sortColumn, $this->sortDirection);
 
-        // return view('livewire.careers', [
-        //     'careers' => Career::when($this->term, function($query, $term){
-        //         return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
-        //     })->latest()->paginate(5),
-        //     'faculties' => Faculty::all()
-        // ]);
-
         if($this->term){
             $careers->when($this->term, function($query, $term){
                 return $query->whereRaw('LOWER(name) LIKE ? ', ['%'.trim(strtolower($term)).'%']);
