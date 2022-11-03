@@ -18,8 +18,10 @@ class Careers extends Component
         'active' => 'ACTIVE'
     ];
     public $id_career, $name;
+    public $career;
     public $term;
     public $modal = false;
+    public $confirm_delete = false;
 
     public $faculty = null;
 
@@ -95,10 +97,17 @@ class Careers extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function confirmDelete($id)
     {
-        Career::find($id)->delete();
+        $this->career = $id;
+        $this->confirm_delete = true;
+    }
+
+    public function deleteCareer()
+    {
+        Career::find($this->career)->delete();
         session()->flash('message', 'Registro eliminado correctamente');
+        $this->confirm_delete = false;
     }
 
     public function guardar()

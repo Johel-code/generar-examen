@@ -85,7 +85,7 @@
 								Edit
 							</button>
 							<button 
-								wire:click="borrar({{$career->id}})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
+								wire:click="confirmDelete({{$career->id}})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
 								Delete
 							</button>
 						</td>
@@ -93,6 +93,7 @@
 					@endforeach
 				</tbody>
 			</table>
+        @include('livewire.career.confirm-delete')
 			{{ $careers->links() }}
 		</div>
 	</div>
