@@ -20,6 +20,7 @@ class Careers extends Component
     public $id_career, $name;
     public $career;
     public $term;
+    public $filtroFaculty;
     public $modal = false;
     public $confirm_delete = false;
 
@@ -40,9 +41,23 @@ class Careers extends Component
         'faculty.required' => 'Debe seleccionar una facultad'
     ];
 
+    public function updatingTerm()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFiltroFaculty()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $careers = Career::withCount('subjects')
+        $careers = Career::query()
+        ->when($this->filtroFaculty, function($query){
+            $query->where('faculty_id', $this->filtroFaculty);
+        })
+            ->withCount('subjects')
             ->orderBy($this->sortColumn, $this->sortDirection);
 
         if($this->term){
