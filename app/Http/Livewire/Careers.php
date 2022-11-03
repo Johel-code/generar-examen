@@ -64,6 +64,11 @@ class Careers extends Component
         $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
     }
 
+    public function cerrarBuscador()
+    {
+        $this->term = "";
+    }
+
     public function crear()
     {
         $this->limpiarCampos();
