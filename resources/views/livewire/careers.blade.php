@@ -11,21 +11,45 @@
         {{-- <div> --}}
         {{--     @livewire('create-career') --}}
         {{-- </div> --}}
-		<div class="bg-white rounded flex items-center w-full max-w-md shadow-sm border border-gray-200">
-			<input wire:model="term" type="search" name="" id="" placeholder="Search" 
-			class="border-0 w-full pl-3 text-sm text-black focus:outline-none focus:border-transparent focus:ring-0 bg-transparent"/>
-            @if($term)
-                <label wire:click="cerrarBuscador()" class="w-8 text-center text-xl align-text-top text-gray-600 h-8 cursor-pointer">
-                    x
-                </label>
-            @else
-			<button type="submit" class="outline-none focus:outline-none">
-                <svg class="w-8 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round" 
-                    stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-			</button>
-            @endif
+		<div class="flex w-2/5">
+            <div class="mr-2 w-5/12">
+                <select wire:model="filtroFaculty" class="form-select appearance-none
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding bg-no-repeat
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                    <option value="">Todo</option>
+                     @foreach($faculties as $faculty)
+                        <option value="{{$faculty->id}}">{{$faculty->name}}</option>
+                     @endforeach
+                </select>
+            </div>
+            <div class="bg-white rounded flex items-center w-7/12 max-w-md shadow-sm border border-gray-200">
+                <input wire:model="term" type="search" name="" id="" placeholder="Search" 
+                class="border-0 w-full pl-3 text-sm text-black focus:outline-none focus:border-transparent focus:ring-0 bg-transparent"/>
+                @if($term)
+                    <label wire:click="cerrarBuscador()" class="w-8 text-center text-xl align-text-top text-gray-600 h-8 cursor-pointer">
+                        x
+                    </label>
+                @else
+                <button type="submit" class="outline-none focus:outline-none">
+                    <svg class="w-8 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round" 
+                        stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+                @endif
+            </div>
 		</div>
 	</div>
 	<div class="pt-2">
