@@ -6,9 +6,7 @@
 				class="bg-orange-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer hover:bg-orange-700 transition duration-300">
 				Create
 			</button>
-			@if($modal)
-				@include('livewire.crear-career')
-			@endif
+            @include('livewire.crear-career')
 		</div>
         {{-- <div> --}}
         {{--     @livewire('create-career') --}}
@@ -38,10 +36,20 @@
 			<table class="w-full">
 				<thead>
 					<tr class ="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-						<th class="px-4 py-3">Name</th>
-						<th class="px-4 py-3">Materias</th>
-						<th class="px-4 py-3">Created at</th>
-						<th class="px-4 py-3">Status</th>
+                        @foreach ($columns as $key => $value)
+                            <th class="px-4 py-3" wire:click="sort('{{ $key}}')"> 
+                                <button class="font-semibold">
+                                    {{ $value }} 
+                                    @if ($sortColumn == $key)
+                                        @if($sortDirection == 'asc')
+                                            &uarr;
+                                        @else
+                                            &darr;
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
+                        @endforeach
 						<th  class="px-4 py-3">Actions</th>
 					</tr>
 				</thead>
@@ -64,10 +72,10 @@
 						</td>
 						<td class="px-4 py-3 text-sm">
 							<div>
-								<a href="#" class="">Materias: {{$career->subjects->count()}}</a>
+								<p class="">Materias: {{$career->subjects->count()}}</p>
 							</div>
 						</td>
-						<td class="px-4 py-3 text-sm">{{$career->created_at->diffForHumans()}}</td>
+						<td class="px-4 py-3 text-sm">{{$career->updated_at->diffForHumans()}}</td>
 						<td class="px-4 py-3 text-xs">  
 							<livewire:toggle-career :career='$career' :field="'active'" :key="'toggle-button'.$career->id" />
 						</td>
@@ -77,7 +85,7 @@
 								Edit
 							</button>
 							<button 
-								wire:click="borrar({{$career->id}})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
+								wire:click="confirmDelete({{$career->id}})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
 								Delete
 							</button>
 						</td>
@@ -85,6 +93,7 @@
 					@endforeach
 				</tbody>
 			</table>
+        @include('livewire.career.confirm-delete')
 			{{ $careers->links() }}
 		</div>
 	</div>

@@ -10,12 +10,23 @@ use Livewire\WithPagination;
 class Careers extends Component
 {
     use WithPagination;
+
+    public $columns = [
+        'name' => 'NAME',
+        'subjects_count' => 'SUBJECTS', 
+        'updated_at' => 'UPDATED_AT',
+        'active' => 'ACTIVE'
+    ];
     public $id_career, $name;
+    public $career;
     public $term;
     public $modal = false;
+    public $confirm_delete = false;
 
     public $faculty = null;
 
+    public $sortColumn = "updated_at";
+    public $sortDirection = "desc";
     // protected $listeners = ['render'];
 
     protected $rules = [
@@ -31,13 +42,26 @@ class Careers extends Component
 
     public function render()
     {
-        //return view('livewire.careers');
+        $careers = Career::withCount('subjects')
+            ->orderBy($this->sortColumn, $this->sortDirection);
+
+        if($this->term){
+            $careers->when($this->term, function($query, $term){
+                return $query->whereRaw('LOWER(name) LIKE ? ', ['%'.trim(strtolower($term)).'%']);
+            });
+        }
+        $careers = $careers->paginate(5);
+
         return view('livewire.careers', [
-            'careers' => Career::when($this->term, function($query, $term){
-                return $query->whereRaw('LOWER(name) LIKE ? ',['%'.trim(strtolower($term)).'%']);
-            })->latest()->paginate(5),
+            'careers' => $careers,
             'faculties' => Faculty::all()
         ]);
+    }
+
+    public function sort($column)
+    {
+        $this->sortColumn = $column;
+        $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
     }
 
     public function crear()
@@ -73,10 +97,17 @@ class Careers extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function confirmDelete($id)
     {
-        Career::find($id)->delete();
+        $this->career = $id;
+        $this->confirm_delete = true;
+    }
+
+    public function deleteCareer()
+    {
+        Career::find($this->career)->delete();
         session()->flash('message', 'Registro eliminado correctamente');
+        $this->confirm_delete = false;
     }
 
     public function guardar()
