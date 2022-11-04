@@ -109,14 +109,16 @@
             
              <div class="mb-4 text-md text-gray-600">
                 <label for="name" class="text-md text-gray-600">Name</label>
-                <input type="text" id="name" wire:model="name" autocomplete="off" name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 rounded-md" placeholder="Example. Ing. Financiera">
+                <input type="text" id="name" wire:model="name" autocomplete="off" 
+                    wire:keydown.enter="guardar()"
+                    name="name" class="h-3 p-6 w-full text-sm text-black border-2 border-gray-300 rounded-md" placeholder="Example. Ing. Financiera">
 
             <x-jet-input-error for="name" />
             </div>
 
             <div class = "mb-4">
                 <label for="phone" class="text-md text-gray-600">Facultad</label>   
-                <select required wire:model="faculty" class="form-select appearance-none
+                <select required wire:model="faculty" wire:keydown.enter="guardar()" class="form-select appearance-none
                             block
                             w-full
                             px-3
